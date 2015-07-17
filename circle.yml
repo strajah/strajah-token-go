@@ -1,5 +1,8 @@
 test:
   pre:
+    - mkdir strajah-token-go
+    - mv lib/ strajah-token-go
+    - mv tests/ strajah-token-go
     - go get github.com/onsi/ginkgo/ginkgo
     - go get github.com/onsi/gomega
   override:
