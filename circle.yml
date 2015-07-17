@@ -1,7 +1,8 @@
 dependencies:
-  - pre
+  pre:
     - go get github.com/onsi/ginkgo/ginkgo
     - go get github.com/onsi/gomega
+    - go get github.com/strajah/strajah-token-go
 test:
   override:
     - go test ./...
