@@ -3,7 +3,7 @@ package createToken_test
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	createToken "github.com/strajah/strajah-token-go/lib/createToken"
+	"github.com/strajah/strajah-token-go/lib/createToken"
 	"testing"
 )
 
