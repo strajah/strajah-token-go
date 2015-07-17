@@ -5,4 +5,4 @@ dependencies:
     - go get github.com/strajah/strajah-token-go
 test:
   override:
-    - go test ./...
+    - go test ./... -cover
