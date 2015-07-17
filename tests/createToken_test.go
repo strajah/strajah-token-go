@@ -4,14 +4,15 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"testing"
+	"github.com/strajah/strajah-token-go/lib/createToken"
 )
 
 var _ = Describe("Token creation", func() {
 	It("Should generate a token", func() {
-		data := DataToBeTokenized{
+		data := createToken.DataToBeTokenized{
 			UserId: "user-123",
 		}
-		token := Create(&data)
+		token := createToken.Create(&data)
 
 		Expect(token).ToNot(BeNil())
 	})

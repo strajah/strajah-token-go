@@ -1,0 +1,5 @@
+package strajahTokenGo
+
+func main() {
+
+}
