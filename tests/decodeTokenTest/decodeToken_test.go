@@ -1,10 +1,11 @@
-package decodeToken
+package decodeTokenTest
 
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"testing"
 	"github.com/strajah/strajah-token-go/lib/createToken"
+	"github.com/strajah/strajah-token-go/lib/decodeToken"
 	"github.com/strajah/strajah-token-go/lib/settings"
 )
 
@@ -22,7 +23,7 @@ var _ = Describe("Decode tokens", func() {
 
 		token, _ := createToken.Create(settings, &data)
 
-		tokenSet, _ := Decode(settings, token)
+		tokenSet, _ := decodeToken.Decode(settings, token)
 		Expect(tokenSet.UserId).To(Equal(userId))
 	})
 
@@ -41,8 +42,8 @@ var _ = Describe("Decode tokens", func() {
 
 		token, _ := createToken.Create(validSettings, &data)
 
-		tokenSet, err := Decode(invalidSettings, token)
-		Expect(tokenSet).To(Equal(TokenSet{})) //expect it to be an empty structure
+		tokenSet, err := decodeToken.Decode(invalidSettings, token)
+		Expect(tokenSet).To(Equal(decodeToken.TokenSet{})) //expect it to be an empty structure
 		Expect(err).ToNot(BeNil())
 	})
 })
