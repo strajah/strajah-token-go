@@ -6,14 +6,15 @@ import (
 	"crypto/cipher"
 	"crypto/aes"
 	"bytes"
+	"github.com/strajah/strajah-token-go/lib/settings"
 )
 
 type DataToBeTokenized struct {
 	UserId string
 }
 
-func Create (data *DataToBeTokenized) (string) {
-	aesCipherBlock, _ := aes.NewCipher([]byte("0123456789ABCDEF"))
+func Create (settings settings.Settings, data *DataToBeTokenized) (string) {
+	aesCipherBlock, _ := aes.NewCipher([]byte(settings.CipherKey))
 	aesEncrypter := cipher.NewCFBEncrypter(aesCipherBlock, []byte("abcdefghabcdefgh"))
 
 	serializedData := serialize(data)

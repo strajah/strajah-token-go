@@ -6,14 +6,16 @@ import (
 	"encoding/base64"
 	"encoding/gob"
 	"bytes"
+	"github.com/strajah/strajah-token-go/lib/settings"
+	"fmt"
 )
 
 type TokenSet struct {
 	UserId string
 }
 
-func Decode(encodedToken string) (TokenSet) {
-	aesBlockDecryptor, _ := aes.NewCipher([]byte("0123456789ABCDEF"))
+func Decode(settings settings.Settings, encodedToken string) (TokenSet, error) {
+	aesBlockDecryptor, _ := aes.NewCipher([]byte(settings.CipherKey))
 	aesDecryptor := cipher.NewCFBDecrypter(aesBlockDecryptor, []byte("abcdefghabcdefgh"))
 
 	encodedDataBytes, _ := base64.StdEncoding.DecodeString(encodedToken)
@@ -24,10 +26,14 @@ func Decode(encodedToken string) (TokenSet) {
 	return unserialize(decodedDataBytes)
 }
 
-func unserialize (decodedDataBytes []byte) (TokenSet){
+func unserialize (decodedDataBytes []byte) (TokenSet, error){
 	decodedDataBuffer := bytes.NewBuffer(decodedDataBytes)
 	decoder := gob.NewDecoder(decodedDataBuffer)
+
 	var decodedStructure TokenSet
 	decoder.Decode(&decodedStructure)
-	return decodedStructure
+	if decodedStructure == (TokenSet{}) {
+		return decodedStructure, fmt.Errorf("Unable to decode")
+	}
+	return decodedStructure, nil
 }
