@@ -20,7 +20,7 @@ var _ = Describe("Decode tokens", func() {
 			UserId: userId,
 		}
 
-		token := createToken.Create(settings, &data)
+		token, _ := createToken.Create(settings, &data)
 
 		tokenSet, _ := Decode(settings, token)
 		Expect(tokenSet.UserId).To(Equal(userId))
@@ -39,7 +39,7 @@ var _ = Describe("Decode tokens", func() {
 			CipherKey: "0123456789ABCDEF",
 		}
 
-		token := createToken.Create(validSettings, &data)
+		token, _ := createToken.Create(validSettings, &data)
 
 		tokenSet, err := Decode(invalidSettings, token)
 		Expect(tokenSet).To(Equal(TokenSet{})) //expect it to be an empty structure

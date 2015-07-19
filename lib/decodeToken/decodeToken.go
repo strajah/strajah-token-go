@@ -14,8 +14,8 @@ type TokenSet struct {
 	UserId string
 }
 
-func Decode(settings settings.Settings, encodedToken string) (TokenSet, error) {
-	aesBlockDecryptor, _ := aes.NewCipher([]byte(settings.CipherKey))
+func Decode(customSettings settings.Settings, encodedToken string) (TokenSet, error) {
+	aesBlockDecryptor, _ := aes.NewCipher([]byte(customSettings.CipherKey))
 	aesDecryptor := cipher.NewCFBDecrypter(aesBlockDecryptor, []byte("abcdefghabcdefgh"))
 
 	encodedDataBytes, _ := base64.StdEncoding.DecodeString(encodedToken)
